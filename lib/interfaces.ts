@@ -1,4 +1,4 @@
-interface StarWarsCharacter {
+interface Character {
   name: string;
   height: string;
   mass: string;
@@ -15,4 +15,20 @@ interface StarWarsCharacter {
   created: string; // You could use Date if you parse the string into a Date object
   edited: string;  // Same as above
   url: string;
+}
+
+interface ApiResponse {
+  count: number;
+  next: string | null;
+  previous: string | null;
+  results: Character[];
+}
+
+interface PaginationProps {
+  count: number;
+  nextUrl: string | null;
+  previousUrl: string | null;
+  currentPage: number;
+  totalPages: number;
+  onPageChange: () => null
 }

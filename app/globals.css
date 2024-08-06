@@ -67,3 +67,6 @@
     @apply bg-background text-foreground;
   }
 }
+.h4 {
+  @apply text-[22px] font-semibold;
+}
