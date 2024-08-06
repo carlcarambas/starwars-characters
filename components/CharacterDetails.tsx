@@ -67,7 +67,7 @@ const CharacterDetails = ({ detail }: { detail: Character }) => {
             <section className="mt-2">
               <span className="font-semibold">Films:</span>
               {loading && (
-                <div className="grid xl:grid-cols-2 gap-[10px] my-4">
+                <div className="grid xl:grid-cols-2 gap-[10px] my-4 justify-center">
                   <Skeleton className="h-4 w-[180px]" />
                   <Skeleton className="h-4 w-[180px]" />
                   <Skeleton className="h-4 w-[180px]" />
