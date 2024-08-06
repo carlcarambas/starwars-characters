@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import { Pagination } from './Pagination'
 import PaginationCn from './PaginationCn'
 import CharacterCard from './CharacterCard'
+import { Skeleton } from './ui/skeleton'
 
 const Characters = () => {
   const [data, setData] = useState<ApiResponse>()
@@ -27,24 +28,26 @@ const Characters = () => {
         )
         setData(characterResponse)
       }
-      fetchCharacters()
+      fetchCharacters().finally(() => setIsLoading(false))
     } catch (_error) {
       setError(error?.message)
-    } finally {
-      setIsLoading(false)
-      // setIsLoading(false)
     }
 
     return () => {
       if (error) controller.abort()
-      if (data) setIsLoading(false)
     }
   }, [page])
 
   return (
     <div>
-      <div className="grid xl:grid-cols-3 gap-1">
-        {isLoading && <span>Loading..</span>}
+      <div className="grid xl:grid-cols-3 gap-1 mb-4">
+        {isLoading && (
+          <>
+            <Skeleton className="h-[250px] w-[250px] rounded-xl" />
+            <Skeleton className="h-[250px] w-[250px] rounded-xl" />
+            <Skeleton className="h-[250px] w-[250px] rounded-xl" />
+          </>
+        )}
         {error && <span>Error</span>}
         {!isLoading &&
           !error &&
