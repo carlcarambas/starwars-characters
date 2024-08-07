@@ -47,7 +47,7 @@ const Characters = () => {
   }, [page, query])
 
   useEffect(() => {
-    if (gender && gender !== 'all') {
+    if (gender) {
       setFilteredCharacters(characters.filter((char) => char.gender === gender))
     } else {
       setFilteredCharacters(characters)

@@ -11,7 +11,7 @@ import {
 } from './ui/select'
 
 const options = [
-  { value: 'all', label: 'All' },
+  { value: 'clear', label: 'All' },
   { value: 'male', label: 'Male' },
   { value: 'female', label: 'Female' },
   { value: 'n/a', label: 'N/A' },
@@ -34,7 +34,10 @@ const SearchFilter = () => {
   }
 
   const handleGenderChange = (newGenderFilter: string) => {
-    setFilter({ ...filter, gender: newGenderFilter })
+    setFilter({
+      ...filter,
+      gender: newGenderFilter === 'clear' ? '' : newGenderFilter,
+    })
   }
 
   return (
@@ -46,7 +49,7 @@ const SearchFilter = () => {
         onChange={handleChange}
         className="border-2 focus:border-black-500"
       />
-      <Select onValueChange={handleGenderChange}>
+      <Select onValueChange={handleGenderChange} value={filter?.gender}>
         <SelectTrigger className="w-[180px]">
           <SelectValue placeholder="Gender" />
         </SelectTrigger>
