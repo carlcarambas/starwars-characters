@@ -1,13 +1,14 @@
 'use client'
 import { baseUrl, getApi } from '@/lib/api'
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { Pagination } from './Pagination'
-import PaginationCn from './PaginationCn'
 import CharacterCard from './CharacterCard'
 import { Skeleton } from './ui/skeleton'
+import { useSearch } from './context/context'
 
 const Characters = () => {
   const [data, setData] = useState<ApiResponse>()
+  const { query } = useSearch()
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const [error, setError] = useState<any>(null)
   const [page, setPage] = useState<number>(1)
@@ -22,10 +23,10 @@ const Characters = () => {
     const controller = new AbortController()
     try {
       const fetchCharacters = async () => {
-        const characterResponse = await getApi(
-          `${baseUrl}?page=${page}`,
-          controller.signal
-        )
+        let queryUrl = `${baseUrl}${
+          query ? `/?search=${query}` : `?page=${page}`
+        }`
+        const characterResponse = await getApi(queryUrl, controller.signal)
         setData(characterResponse)
       }
       fetchCharacters().finally(() => setIsLoading(false))
@@ -36,10 +37,10 @@ const Characters = () => {
     return () => {
       if (error) controller.abort()
     }
-  }, [page])
+  }, [page, query])
 
   return (
-    <div>
+    <div className="flex flex-col h-full">
       <div className="grid xl:grid-cols-3 gap-1 mb-4">
         {isLoading && (
           <>

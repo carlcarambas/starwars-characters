@@ -1,10 +1,14 @@
 import Characters from '@/components/Characters'
-import Image from 'next/image'
+import { SearchProvider } from '@/components/context/context'
+import SearchFilter from '@/components/SearchFilter'
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <Characters />
-    </main>
+    <SearchProvider>
+      <main className="flex min-h-screen flex-col items-center p-24">
+        <SearchFilter />
+        <Characters />
+      </main>
+    </SearchProvider>
   )
 }
