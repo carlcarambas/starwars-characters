@@ -26,7 +26,7 @@ const SearchFilter = () => {
         placeholder="Search"
         value={inputValue}
         onChange={handleChange}
-        className="border-4 focus:border-black-500"
+        className="border-2 focus:border-black-500"
       />
     </section>
   )

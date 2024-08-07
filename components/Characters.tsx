@@ -41,7 +41,7 @@ const Characters = () => {
 
   return (
     <div className="flex flex-col h-full">
-      <div className="grid xl:grid-cols-3 gap-1 mb-4">
+      <div className="grid xl:grid-cols-3 gap-2 mb-4">
         {isLoading && (
           <>
             <Skeleton className="h-[250px] w-[250px] rounded-xl" />
