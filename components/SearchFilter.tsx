@@ -20,6 +20,8 @@ const options = [
   { value: 'n/a', label: 'N/A' },
 ]
 
+const initWorldOptions = [{ value: 'clear', label: 'All' }]
+
 const SearchFilter = () => {
   const { query, setQuery, filter, setFilter, homeworldUrls } = useSearch()
   const [inputValue, setInputValue] = useState(query)
@@ -71,7 +73,7 @@ const SearchFilter = () => {
             const worldOptions = uniqueWorlds.map((planet: Planet) => {
               return { value: planet.url, label: planet.name }
             })
-            setWorldOptions(worldOptions)
+            setWorldOptions([...initWorldOptions, ...worldOptions])
           })
           .finally(() => setIsLoadingHome(false))
       } catch (fetchHomeError) {
