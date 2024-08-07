@@ -32,3 +32,8 @@ interface PaginationProps {
   totalPages: number;
   onPageChange: () => null
 }
+
+interface IFilter {
+  homeworld: string;
+  gender: string;
+}

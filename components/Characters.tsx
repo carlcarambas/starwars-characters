@@ -8,10 +8,16 @@ import { useSearch } from './context/context'
 
 const Characters = () => {
   const [data, setData] = useState<ApiResponse>()
-  const { query } = useSearch()
+  const {
+    query,
+    filter: { gender },
+  } = useSearch()
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const [error, setError] = useState<any>(null)
   const [page, setPage] = useState<number>(1)
+
+  const [characters, setCharacters] = useState<Character[]>([])
+  const [filteredCharacters, setFilteredCharacters] = useState<Character[]>([])
 
   const handlePageChange = (newPage: number) => {
     setPage(newPage)
@@ -28,6 +34,7 @@ const Characters = () => {
         }`
         const characterResponse = await getApi(queryUrl, controller.signal)
         setData(characterResponse)
+        setCharacters(characterResponse?.results)
       }
       fetchCharacters().finally(() => setIsLoading(false))
     } catch (_error) {
@@ -38,6 +45,14 @@ const Characters = () => {
       if (error) controller.abort()
     }
   }, [page, query])
+
+  useEffect(() => {
+    if (gender && gender !== 'all') {
+      setFilteredCharacters(characters.filter((char) => char.gender === gender))
+    } else {
+      setFilteredCharacters(characters)
+    }
+  }, [characters, gender])
 
   return (
     <div className="flex flex-col h-full">
@@ -52,7 +67,7 @@ const Characters = () => {
         {error && <span>Error</span>}
         {!isLoading &&
           !error &&
-          data?.results.map((char, index) => (
+          filteredCharacters.map((char, index) => (
             <CharacterCard key={index} {...char} />
           ))}
       </div>
