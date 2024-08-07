@@ -6,6 +6,8 @@ interface SearchContextType {
   setQuery: React.Dispatch<React.SetStateAction<string>>
   filter: IFilter
   setFilter: React.Dispatch<React.SetStateAction<IFilter>>
+  homeworldUrls: string[]
+  setHomeworldUrls: React.Dispatch<React.SetStateAction<string[]>>
 }
 
 export const useSearch = () => {
@@ -25,9 +27,19 @@ export const SearchProvider: React.FC<{ children: ReactNode }> = ({
 }) => {
   const [query, setQuery] = useState<string>('')
   const [filter, setFilter] = useState<IFilter>({ gender: '', homeworld: '' })
+  const [homeworldUrls, setHomeworldUrls] = useState<string[]>([])
 
   return (
-    <SearchContext.Provider value={{ query, setQuery, filter, setFilter }}>
+    <SearchContext.Provider
+      value={{
+        query,
+        setQuery,
+        filter,
+        setFilter,
+        homeworldUrls,
+        setHomeworldUrls,
+      }}
+    >
       {children}
     </SearchContext.Provider>
   )

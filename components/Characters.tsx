@@ -10,7 +10,8 @@ const Characters = () => {
   const [data, setData] = useState<ApiResponse>()
   const {
     query,
-    filter: { gender },
+    filter: { gender, homeworld },
+    setHomeworldUrls,
   } = useSearch()
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const [error, setError] = useState<any>(null)
@@ -35,6 +36,9 @@ const Characters = () => {
         const characterResponse = await getApi(queryUrl, controller.signal)
         setData(characterResponse)
         setCharacters(characterResponse?.results)
+        setHomeworldUrls(
+          characterResponse?.results.map((c: Character) => c.homeworld)
+        )
       }
       fetchCharacters().finally(() => setIsLoading(false))
     } catch (_error) {
@@ -49,10 +53,14 @@ const Characters = () => {
   useEffect(() => {
     if (gender) {
       setFilteredCharacters(characters.filter((char) => char.gender === gender))
+    } else if (homeworld) {
+      setFilteredCharacters(
+        characters.filter((char) => char.homeworld === homeworld)
+      )
     } else {
       setFilteredCharacters(characters)
     }
-  }, [characters, gender])
+  }, [characters, gender, homeworld])
 
   return (
     <div className="flex flex-col h-full">
