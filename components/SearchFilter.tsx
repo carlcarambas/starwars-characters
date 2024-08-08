@@ -118,7 +118,7 @@ const SearchFilter = () => {
           <SelectValue placeholder="Home" />
         </SelectTrigger>
         <SelectContent>
-          {isLoadingHome && <Skeleton className="h-4 w-[95%] m-2" />}
+          {isLoadingHome && <Skeleton className="h-4 w-[93%] m-2" />}
           {worldOptions &&
             !isLoadingHome &&
             worldOptions.map((option, index) => (
