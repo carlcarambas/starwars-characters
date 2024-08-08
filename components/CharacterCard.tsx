@@ -7,7 +7,10 @@ import { DialogTrigger } from './ui/dialog'
 
 const CharacterCard = (character: Character) => {
   return (
-    <Card className="group overflow-hidden relative shadow-md">
+    <Card
+      id="character-details"
+      className="group overflow-hidden relative shadow-md"
+    >
       <CardHeader className="p-5">
         <div
           className="relative w-full h-[100px] flex items-center justify-center
@@ -20,6 +23,7 @@ const CharacterCard = (character: Character) => {
             width={270}
             height={270}
             alt=""
+            data-testid="character-image"
           />
           <div
             className="bg-secondary w-[100%] h-[100%] rounded-md 
