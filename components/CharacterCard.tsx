@@ -7,7 +7,7 @@ const CharacterCard = (character: Character) => {
   return (
     <Card
       id="character-details"
-      className="group overflow-hidden relative shadow-md"
+      className="group overflow-hidden relative shadow-md min-w-[250px]"
     >
       <CardHeader className="p-5">
         <div
@@ -16,7 +16,7 @@ const CharacterCard = (character: Character) => {
         xl:dark:bg-work_project_bg_dark xl:bg-[110%] xl:bg-no-repeat overflow-hidden"
         >
           <Image
-            className="object-contain absolute bottom-0 shadow-2xl w-full h-full rounded-md"
+            className="object-cover absolute bottom-0 shadow-2xl w-[50%] h-full rounded-md"
             // src={Math.random() < 0.5 ? '/darkside.png' : '/jedi.png'}
             src={character?.imgUrl}
             width={270}
