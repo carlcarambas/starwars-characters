@@ -26,12 +26,12 @@ interface ApiResponse {
 }
 
 interface PaginationProps {
-  count: number;
-  nextUrl: string | null;
-  previousUrl: string | null;
-  currentPage: number;
-  totalPages: number;
-  onPageChange: () => null
+  count: number
+  pageSize: number
+  currentPage: number
+  onPageChange: (page: number) => void
+  nextPageEnabled: boolean
+  prevPageEnabled: boolean
 }
 
 interface IFilter {

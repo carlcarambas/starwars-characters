@@ -7,15 +7,6 @@ import {
   ChevronsRight,
 } from 'lucide-react'
 
-interface PaginationProps {
-  count: number
-  pageSize: number
-  currentPage: number
-  onPageChange: (page: number) => void
-  nextPageEnabled: boolean
-  prevPageEnabled: boolean
-}
-
 export function Pagination({
   count,
   pageSize,
