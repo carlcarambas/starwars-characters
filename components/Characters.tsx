@@ -1,5 +1,5 @@
 'use client'
-import { baseUrl, getApi } from '@/lib/api'
+import { baseUrl, getApi, imageUrl } from '@/lib/api'
 import { useContext, useEffect, useState } from 'react'
 import { Pagination } from './Pagination'
 import CharacterCard from './CharacterCard'
@@ -29,18 +29,30 @@ const Characters = () => {
     setError(null)
     const controller = new AbortController()
     try {
-      const fetchCharacters = async () => {
+      const fetchCharacters = async (): Promise<Character[]> => {
         let queryUrl = `${baseUrl}${
           query ? `/?search=${query}` : `?page=${page}`
         }`
         const characterResponse = await getApi(queryUrl, controller.signal)
         setData(characterResponse)
-        setCharacters(characterResponse?.results)
         setHomeworldUrls(
           characterResponse?.results.map((c: Character) => c.homeworld)
         )
+        return characterResponse?.results
       }
-      fetchCharacters().finally(() => setIsLoading(false))
+
+      fetchCharacters()
+        .then((characters) => {
+          const charactersWithImages = characters.map((c) => {
+            const cstring = c.url.split('/')
+            return {
+              ...c,
+              imgUrl: `${imageUrl}/${cstring[cstring.length - 2]}.jpg`,
+            }
+          })
+          setCharacters(charactersWithImages)
+        })
+        .finally(() => setIsLoading(false))
     } catch (_error) {
       setError(error?.message)
     }
@@ -50,6 +62,7 @@ const Characters = () => {
     }
   }, [page, query])
 
+  // filter effects
   useEffect(() => {
     if (gender) {
       setFilteredCharacters(characters.filter((char) => char.gender === gender))

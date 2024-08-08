@@ -1,9 +1,7 @@
 import Image from 'next/image'
-import { Button } from './ui/button'
 import { Card, CardHeader } from './ui/card'
 import { BookUser } from 'lucide-react'
 import CharacterDetails from './CharacterDetails'
-import { DialogTrigger } from './ui/dialog'
 
 const CharacterCard = (character: Character) => {
   return (
@@ -18,11 +16,12 @@ const CharacterCard = (character: Character) => {
         xl:dark:bg-work_project_bg_dark xl:bg-[110%] xl:bg-no-repeat overflow-hidden"
         >
           <Image
-            className="object-contain absolute bottom-0 shadow-2xl w-full h-full "
-            src={Math.random() < 0.5 ? '/darkside.png' : '/jedi.png'}
+            className="object-contain absolute bottom-0 shadow-2xl w-full h-full rounded-md"
+            // src={Math.random() < 0.5 ? '/darkside.png' : '/jedi.png'}
+            src={character?.imgUrl}
             width={270}
             height={270}
-            alt=""
+            alt="character-image"
             data-testid="character-image"
           />
           <div

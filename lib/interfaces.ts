@@ -15,6 +15,7 @@ interface Character {
   created: string; // You could use Date if you parse the string into a Date object
   edited: string;  // Same as above
   url: string;
+  imgUrl?: any;
 }
 
 interface ApiResponse {

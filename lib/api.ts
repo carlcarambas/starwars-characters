@@ -1,4 +1,5 @@
 export const baseUrl = 'https://swapi.dev/api/people'
+export const imageUrl = 'https://starwars-visualguide.com/assets/img/characters/'
 export const getApi = async (url: string, signal: AbortSignal) => {
   const response = await fetch(url, { signal })
   if (!response.ok) {
